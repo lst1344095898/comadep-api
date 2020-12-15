@@ -15,7 +15,7 @@ public class JwtUitls {
     /**
      * 过期时间5分钟
      */
-    private static final long EXPIRE_TIME=5*60*1000;
+    private static final long EXPIRE_TIME=60*60*1000;
     /**
      * 加密密钥
      */

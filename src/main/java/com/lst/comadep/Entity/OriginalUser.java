@@ -2,7 +2,7 @@ package com.lst.comadep.Entity;
 
 import java.util.Date;
 
-public class User {
+public class OriginalUser {
     private int id;
     private String userName;
     private String password;
@@ -15,6 +15,7 @@ public class User {
     private Date gmt_modified;
     private int buildingNumber;
     private String floor;
+    private int isActivation;
 
     public int getId() {
         return id;
@@ -112,9 +113,17 @@ public class User {
         this.floor = floor;
     }
 
+    public int getIsActivation() {
+        return isActivation;
+    }
+
+    public void setIsActivation(int isActivation) {
+        this.isActivation = isActivation;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
+        return "OriginalUser{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
@@ -127,6 +136,7 @@ public class User {
                 ", gmt_modified=" + gmt_modified +
                 ", buildingNumber=" + buildingNumber +
                 ", floor='" + floor + '\'' +
+                ", isActivation=" + isActivation +
                 '}';
     }
 }

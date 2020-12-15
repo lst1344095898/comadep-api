@@ -14,7 +14,8 @@ import java.util.Map;
 @Order(2)
 @WebFilter(filterName = "TokenFilter",urlPatterns = {"/*"})
 public class TokenFilter implements Filter {
-
+    private static final String[] arrUrl={"/login","/register","/registerCheck","/redis","/getManyDate",
+            "/getManyDate2","/getManyDate3"};
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -22,6 +23,7 @@ public class TokenFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        boolean isNoFilter=false;
         JwtUitls jwtUitls=new JwtUitls();
         Map<String,String> map = new HashMap<>();
 //        System.out.println((HttpServletRequest)servletRequest.get);
@@ -29,8 +31,16 @@ public class TokenFilter implements Filter {
         String method=((HttpServletRequest)servletRequest).getMethod();
         if(url != null){
             //登录请求直接放行
-            if("/login".equals(url)){
-                System.out.println("登录");
+            //排除特定过滤路径
+            for (String temp: arrUrl
+                 ) {
+                if (temp.equals(url)){
+                    isNoFilter=true;
+                    break;
+                }
+            }
+            if(isNoFilter){
+                System.out.println("登录//注册");
                 filterChain.doFilter(servletRequest,servletResponse);
                 return;
             }else if (method.equals("OPTIONS")){

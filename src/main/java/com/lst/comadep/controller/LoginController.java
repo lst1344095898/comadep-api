@@ -34,9 +34,22 @@ public class LoginController {
         }
         return apiResponse;
     }
+    /**
+     * 注册验证
+     * */
+    @PostMapping("/registerCheck")
+    @ResponseBody
+    public ApiResponse registerCheck(@RequestBody User user){
+
+        if (user==null)
+            return new ApiResponse(400,"数据为空");
+        else
+            return userService.registerCheck(user);
+    }
     @PostMapping("/register")
     @ResponseBody
     public ApiResponse register(@RequestBody User user){
+        System.out.println(user);
         if (user==null){
             return new ApiResponse(400,"数据为空");
         }

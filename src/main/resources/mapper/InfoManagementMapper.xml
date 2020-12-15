@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lst.comadep.Dao.InfoManagementDao">
+    <resultMap id="BaseResultMap" type="com.lst.comadep.Entity.User" >
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="out_address" property="outAddress" jdbcType="VARCHAR"/>
+        <result column="out_time"  property="outTime" jdbcType="DATE"/>
+        <result column="in_address" property="inAddress" jdbcType="VARCHAR"/>
+        <result column="in_time" property="inTime" jdbcType="DATE"/>
+        <result column="event_type" property="eventType" jdbcType="VARCHAR"/>
+        <result column="event_description" property="eventDescription" jdbcType="VARCHAR"/>
+        <result column="action_region" property="actionRegion" jdbcType="VARCHAR"/>
+        <result column="estimate_time" property="estimateTime" jdbcType="DATE"/>
+    </resultMap>
+    <insert id="InputOutInfoById" parameterType="map">
+        insert into comadep.information (user_id,event_type,out_time,action_region,estimate_time,event_description,out_address)
+        values (#{userId},#{eventType},#{outTime},#{actionRegion},#{estimateTime},#{eventDescription},#{outAddress})
+    </insert>
+    <update id="intoByUserId" parameterType="map">
+        update comadep.information set in_address=#{inAddress},in_time=#{inTime},completion_status=1  where user_id=#{userId} and completion_status=0
+    </update>
+    <insert id="inputManyDate" parameterType="map">
+        insert into comadep.information (user_id,out_address,out_time,in_address,in_time,event_type,event_description,action_region,estimate_time,completion_status,is_field)
+        values (#{userId},#{outAddress},#{outTime},#{inAddress},#{inTime},#{eventType},#{eventDescription},#{actionRegion},#{estimateTime},1,1)
+    </insert>
+</mapper>

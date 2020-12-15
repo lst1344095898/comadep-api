@@ -14,18 +14,53 @@
         <result column="sex" property="sex" jdbcType="VARCHAR"/>
         <result column="age" property="age" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="building_number" property="buildingNumber" jdbcType="INTEGER"/>
+        <result column="floor" property="floor" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="OriginalUserResultMap" type="com.lst.comadep.Entity.OriginalUser" >
+        <id column="id" property="id" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="address"  property="address" jdbcType="VARCHAR"/>
+        <result column="telephone_number" property="telephoneNumber" jdbcType="INTEGER"/>
+        <result column="power_code" property="powerCode" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="building_number" property="buildingNumber" jdbcType="INTEGER"/>
+        <result column="floor" property="floor" jdbcType="VARCHAR"/>
+        <result column="is_activation" property="isActivation" jdbcType="INTEGER"/>
     </resultMap>
     <select id="check"  parameterType="map"  resultMap="BaseResultMap">
         select
-        password,user_name,id
+        password,user_name,id,sex,age,address,telephone_number,power_code,create_time
         from comadep.user
-        where user_name=#{userName}
+        where telephone_number=#{telephoneNumber}
+    </select>
+    <select id="PropertyUserCheck" parameterType="map" resultMap="OriginalUserResultMap">
+        select   id,user_name,address,telephone_number,power_code,sex,age,create_time,telephone_number,building_number,floor,is_activation
+        from  comadep.com_original_user
+        where telephone_number=#{telephoneNumber}
     </select>
     <insert id="register" parameterType="map" >
-        insert into comadep.user(user_name,password,address,telephone_number,sex,age,create_time)
-        values (#{userName},#{password},#{address},#{telephoneNumber},#{sex},#{age},#{createTime})
+        insert into comadep.user(id,user_name,password,address,telephone_number,power_code,sex,age,create_time,gmt_modified,building_number
+        ,floor)
+        values (#{id},#{userName},#{password},#{address},#{telephoneNumber},#{powerCode},#{sex},#{age},#{createTime},#{gmtModified},#{buildingNumber},#{floor})
     </insert>
+    <update id="updateRegisterIsActivationById" parameterType="map">
+        update comadep.com_original_user set is_activation=2 where id=#{id}
+    </update>
     <select id="selectUserById" resultMap="BaseResultMap">
-        select user_name,address,telephone,power_code,sex,age,create_time from comadep.user where id=#{id}
+        select user_name,address,telephone_number,power_code,sex,age,create_time from comadep.user where id=#{id}
     </select>
+
+    <select id="selectUserByIdInOriginal" resultMap="BaseResultMap">
+        select id,user_name,address,password,telephone_number,power_code,sex,age,create_time,building_number,floor from comadep.com_original_user where id=#{id}
+    </select>
+    <insert id="importUser" parameterType="map">
+        insert into comadep.com_original_user(user_name,password,address,telephone_number,sex,age,create_time,gmt_modified,building_number
+                                ,floor)
+        values (#{userName},#{password},#{address},#{telephoneNumber},#{sex},#{age},#{createTime},#{gmtModified},#{buildingNumber},#{floor})
+
+    </insert>
 </mapper>

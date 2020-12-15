@@ -9,4 +9,6 @@ public interface UserService {
     ApiResponse login(UserVo userVo);
     ApiResponse register(User user);
     User selectUserById(int id);
+    User selectUserByIdInOriginal(int id);
+    ApiResponse registerCheck(User user);
 }

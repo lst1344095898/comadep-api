@@ -19,17 +19,17 @@ public class LoginInterceptor implements HandlerInterceptor {
 //        ){
 //            return true;
 //        }
-        System.out.println("拦截到："+url);
-        //获取session，有就是说明已经登录，没有就是拦截访问并跳转到登录页面
-        HttpSession session = request.getSession();
-        //获取session
-        String userName = (String) session.getAttribute("userName");
-        //判断是否登录
-        if (userName != null){
-            return true;
-        }
-        request.setAttribute("msg","还没登录！");
-        request.getRequestDispatcher("login").forward(request,response);
+//        System.out.println("拦截到："+url);
+//        //获取session，有就是说明已经登录，没有就是拦截访问并跳转到登录页面
+//        HttpSession session = request.getSession();
+//        //获取session
+//        String userName = (String) session.getAttribute("userName");
+//        //判断是否登录
+//        if (userName != null){
+//            return true;
+//        }
+//        request.setAttribute("msg","还没登录！");
+//        request.getRequestDispatcher("login").forward(request,response);
         return true;
     }
 
