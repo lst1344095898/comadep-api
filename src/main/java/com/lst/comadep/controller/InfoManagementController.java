@@ -6,10 +6,7 @@ import com.lst.comadep.Entity.Vo.OutInInfoVo;
 import com.lst.comadep.Entity.Vo.UserVo;
 import com.lst.comadep.service.InfoManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -21,15 +18,18 @@ public class InfoManagementController {
     public InfoManagementController(InfoManagementService infoManagementService) {
         this.infoManagementService = infoManagementService;
     }
+    // 出门
     @PostMapping("/InputOutInfoById")
+    @ResponseBody
     public ApiResponse InputOutInfoById(@RequestBody OutInInfo outInInfo){
-        outInInfo.setOutAddress("东门");
+//        outInInfo.setOutAddress("东门");
         outInInfo.setOutTime(new Date());
         System.out.println(outInInfo);
-        ApiResponse apiResponse= infoManagementService.InputOutInfoById(outInInfo);
-        return apiResponse;
-//        return new ApiResponse(200,"Yes");
+//        ApiResponse apiResponse= infoManagementService.InputOutInfoById(outInInfo);
+//        return apiResponse;
+        return new ApiResponse(200,"Yes");
     }
+    //进门
     @PostMapping("/intoByUserId")
     public ApiResponse intoByUserId(@RequestBody OutInInfoVo outInInfoVo){
         outInInfoVo.setInAddress("东门");

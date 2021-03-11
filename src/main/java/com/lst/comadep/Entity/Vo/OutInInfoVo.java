@@ -1,11 +1,14 @@
 package com.lst.comadep.Entity.Vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class OutInInfoVo {
     private int id;
     private int userId;//用户id
     private String  inAddress;//进来地点
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date inTime;//进来时间
 
     public int getId() {

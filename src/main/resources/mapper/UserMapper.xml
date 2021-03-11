@@ -63,4 +63,21 @@
         values (#{userName},#{password},#{address},#{telephoneNumber},#{sex},#{age},#{createTime},#{gmtModified},#{buildingNumber},#{floor})
 
     </insert>
+    <select id="getUserByParameter" resultMap="BaseResultMap">
+        select id,user_name,concat(building_number,'号楼' , floor,'室') as address,
+               telephone_number,sex,age,create_time from  comadep.user <if test="buildingNumber !=0"> where  building_number = #{buildingNumber} </if>
+        <if test="floorNumber!=0"> and floor like '${floorNumber}%'</if> limit #{currPage} , #{pageSize}
+    </select>
+    <select id="getUserTotalByParameter" resultType="int">
+        select  count(*)  from   comadep.user  <if test="buildingNumber !=0"> where building_number = #{buildingNumber} </if>
+        <if test="floorNumber!=0"> and floor like '${floorNumber}%'</if>
+    </select>
+    <select id="searchUser" resultMap="BaseResultMap">
+        select  id,user_name,concat(building_number,'号楼' , floor,'室') as address,
+                telephone_number,sex,age,create_time from  comadep.user where user_name like '%${searchParameter}%' or telephone_number like '${searchParameter}%'
+                limit  #{currPage} , #{pageSize};
+    </select>
+    <select id="searchUseTotal" resultType="int">
+        select  count(*)  from   comadep.user  where user_name like '%${searchParameter}%' or telephone_number like '{searchParameter}%'
+    </select>
 </mapper>

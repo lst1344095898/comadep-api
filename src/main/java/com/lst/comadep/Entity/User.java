@@ -1,5 +1,7 @@
 package com.lst.comadep.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class User {
@@ -11,7 +13,9 @@ public class User {
     private int powerCode;
     private String sex;
     private int age;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date gmt_modified;
     private int buildingNumber;
     private String floor;

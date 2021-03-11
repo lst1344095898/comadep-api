@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lst.comadep.Dao.MapDao">
+    <resultMap id="MapResultMapBase" type="com.lst.comadep.Entity.MapInfo">
+        <id column="id" property="id"/>
+        <result column="building_width" property="buildingWidth" jdbcType="INTEGER"/>
+        <result column="building_length" property="buildingLength" jdbcType="INTEGER"/>
+        <result column="building_height" property="buildingHeight" jdbcType="INTEGER"/>
+        <result column="building_number" property="buildingNumber" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="BaseResultMap" type="com.lst.comadep.Entity.OutInInfo" >
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="out_address" property="outAddress" jdbcType="VARCHAR"/>
+        <result column="out_time"  property="outTime" jdbcType="DATE"/>
+        <result column="in_address" property="inAddress" jdbcType="VARCHAR"/>
+        <result column="in_time" property="inTime" jdbcType="DATE"/>
+        <result column="event_type" property="eventType" jdbcType="VARCHAR"/>
+        <result column="event_description" property="eventDescription" jdbcType="VARCHAR"/>
+        <result column="action_region" property="actionRegion" jdbcType="VARCHAR"/>
+        <result column="estimate_time" property="estimateTime" jdbcType="DATE"/>
+    </resultMap>
+    <select id="getMap" resultMap="MapResultMapBase">
+        select * from comadep.com_map
+    </select>
+    <select id="getAccessFrequencyLocal" resultMap="BaseResultMap">
+        select a.in_address,b.user_name,b.building_number from comadep.information AS a	LEFT JOIN comadep.user as b ON a.user_id=b.id
+            where
+            a.is_field= 1 and  year (a.in_time)=#{newYear} and month (a.in_time)=#{newMonth} and
+            b.building_number=#{building_number}
+    </select>
+    <select id="getAccessFrequencyOot" resultMap="BaseResultMap">
+        select a.in_address,b.user_name,b.building_number from comadep.information AS a	LEFT JOIN comadep.user as b ON a.user_id=b.id
+        where
+            a.is_field= 2 and  year (a.in_time)=#{newYear} and month (a.in_time)=#{newMonth} and
+            b.building_number=#{building_number}
+    </select>
+</mapper>

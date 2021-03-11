@@ -3,7 +3,7 @@ package com.lst.comadep.Entity;
 import java.util.Date;
 
 public class OutInInfo {
-        private int id; //时间id
+        private int id; //事件id
         private int userId;//用户id
         private String outAddress; //出门地点
         private Date outTime; //出去时间

@@ -15,7 +15,7 @@ import java.util.Map;
 @WebFilter(filterName = "TokenFilter",urlPatterns = {"/*"})
 public class TokenFilter implements Filter {
     private static final String[] arrUrl={"/login","/register","/registerCheck","/redis","/getManyDate",
-            "/getManyDate2","/getManyDate3"};
+            "/getManyDate2","/infoManagement/InputOutInfoById","/getManyDate3"};
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -26,7 +26,6 @@ public class TokenFilter implements Filter {
         boolean isNoFilter=false;
         JwtUitls jwtUitls=new JwtUitls();
         Map<String,String> map = new HashMap<>();
-//        System.out.println((HttpServletRequest)servletRequest.get);
         String url =  ((HttpServletRequest)servletRequest).getRequestURI();
         String method=((HttpServletRequest)servletRequest).getMethod();
         if(url != null){
@@ -40,7 +39,7 @@ public class TokenFilter implements Filter {
                 }
             }
             if(isNoFilter){
-                System.out.println("登录//注册");
+                System.out.println("登录//注册"+"url-->"+((HttpServletRequest) servletRequest).getRequestURI());
                 filterChain.doFilter(servletRequest,servletResponse);
                 return;
             }else if (method.equals("OPTIONS")){
@@ -49,7 +48,7 @@ public class TokenFilter implements Filter {
                 return;
             }
             else{
-                System.out.println("token验证");
+                System.out.println("url:-->"+((HttpServletRequest) servletRequest).getRequestURI()+"-->token验证");
                 String token =((HttpServletRequest)servletRequest).getHeader("Authorization");
                 //其他请求验证token
 //                System.out.println(token);
@@ -70,6 +69,7 @@ public class TokenFilter implements Filter {
                     }
                 }else{
                     //token为空的返回
+                    System.out.println( "url:-->"+((HttpServletRequest) servletRequest).getRequestURI()+"-->token为空");
                     map.put("errorMsg","未携带token信息");
                 }
             }

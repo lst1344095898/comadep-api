@@ -1,21 +1,18 @@
 package com.lst.comadep.controller;
 
 import com.lst.comadep.Dao.InfoManagementDao;
+import com.lst.comadep.Dao.TestDao;
 import com.lst.comadep.Dao.UserDao;
 import com.lst.comadep.Entity.ApiResponse;
 import com.lst.comadep.Entity.OutInInfo;
 import com.lst.comadep.Entity.User;
-import com.lst.comadep.Entity.Vo.TestDao;
 import com.lst.comadep.service.UserService;
 //import com.lst.comadep.utils.RedisUtil;
 import com.lst.comadep.utils.InitParam;
 import com.lst.comadep.utils.MD5Utils;
 import com.lst.comadep.utils.RandomData.AccessInformation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.Map;
@@ -28,6 +25,8 @@ public class TestController {
     private UserDao userDao;
     @Autowired
     private InfoManagementDao infoManagementDao;
+    @Autowired
+    private TestDao testDao;
 //    @Autowired
 //    private RedisUtil redisUtil;
     @GetMapping("/hello")
@@ -99,7 +98,7 @@ public class TestController {
         //遍历用户id
         AccessInformation accessInformation=new AccessInformation();
         OutInInfo out=new OutInInfo();
-        for (int i=2; i<481;i++){
+        for (int i=482; i<961;i++){
             //遍历这2个月
             for (int j=0; j<59;j++){
                 //填入数据
@@ -140,4 +139,13 @@ public class TestController {
 //        redisUtil.set("redisTestKey","test01");
 //        return  new ApiResponse(200,"看结果",redisUtil.get("redisTestKey"));
 //    }
+//    插入地图数据
+    @PostMapping("/inputMapDate")
+    public void inputMapDate(@RequestBody Map<String,String> map){
+        System.out.println(map.get("X")+","+map.get("Y")+","+map.get("Z"));
+        System.out.println(map.get("countNumber"));
+        testDao.inputMapDate(Integer.parseInt(map.get("id")),Integer.parseInt(map.get("X")),Integer.parseInt(map.get("Y")),
+                Integer.parseInt(map.get("Z")));
+        }
+
 }

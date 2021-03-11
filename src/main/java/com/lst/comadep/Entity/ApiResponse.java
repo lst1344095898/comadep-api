@@ -5,10 +5,17 @@ public class ApiResponse {
     private String message;
     private Object data;
     private String token;
+    private int intResponse;
     public ApiResponse(int code, String message, Object data) {
         this.code = code;
         this.message = message;
         this.data = data;
+    }
+    public ApiResponse(int code, String message, Object data,int intResponse) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+        this.intResponse=intResponse;
     }
     public ApiResponse(int code, String message, Object data,String token) {
         this.code = code;
@@ -54,6 +61,14 @@ public class ApiResponse {
         this.token = token;
     }
 
+    public int getIntResponse() {
+        return intResponse;
+    }
+
+    public void setIntResponse(int intResponse) {
+        this.intResponse = intResponse;
+    }
+
     @Override
     public String toString() {
         return "ApiResponse{" +
@@ -61,6 +76,7 @@ public class ApiResponse {
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 ", token='" + token + '\'' +
+                ", intResponse=" + intResponse +
                 '}';
     }
 }

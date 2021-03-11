@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -26,4 +27,32 @@ public interface UserDao {
                    @Param("age") int age, @Param("createTime")Date createTime,@Param("gmtModified") Date gmtModified,@Param("buildingNumber") int buildingNumber,
                    @Param("floor") String floor);
 
+    /**
+     * 通过参数得到用户
+     * @param currPage
+     * @param pageSize
+     * @param buildingNumber
+     * @param floorNumber
+     * @return
+     */
+    ArrayList<User> getUserByParameter(@Param("currPage") int currPage,@Param("pageSize") int pageSize,
+                                       @Param("buildingNumber") int buildingNumber,@Param("floorNumber") String floorNumber);
+
+    /**
+     * 得到数据总条数
+     * @param buildingNumber
+     * @param floorNumber
+     * @return
+     */
+    int  getUserTotalByParameter(@Param("buildingNumber") int buildingNumber,@Param("floorNumber") String floorNumber);
+
+    /**
+     * 查询用户
+     * @param currPage
+     * @param pageSize
+     * @param searchParameter
+     * @return
+     */
+    ArrayList<User> searchUser(@Param("currPage") int currPage,@Param("pageSize") int pageSize,@Param("searchParameter") String searchParameter);
+    int searchUseTotal(@Param("searchParameter") String searchParameter);
 }
