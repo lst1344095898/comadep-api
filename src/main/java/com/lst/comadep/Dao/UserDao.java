@@ -55,4 +55,6 @@ public interface UserDao {
      */
     ArrayList<User> searchUser(@Param("currPage") int currPage,@Param("pageSize") int pageSize,@Param("searchParameter") String searchParameter);
     int searchUseTotal(@Param("searchParameter") String searchParameter);
+    Integer deleteUserById(@Param("userId") Integer userId);
+    Integer modifyUserById(@Param("user") User user);
 }

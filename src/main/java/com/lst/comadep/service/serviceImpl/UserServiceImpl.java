@@ -103,6 +103,33 @@ public class UserServiceImpl implements UserService {
         return new ApiResponse(200,"请求成功",arrayList,total);
     }
 
+    /**
+     * 通过用户id  删除用户
+     * @param userVo
+     * @return
+     */
+    @Override
+    public ApiResponse deleteUserById(UserVo userVo) {
+        Integer i=userDao.deleteUserById(userVo.getUserId());
+        return i==1?new ApiResponse(200,"删除成功"):new ApiResponse(502,"删除失败");
+    }
+
+    /**
+     * 通过userId 修改用户
+     * @param user
+     * @return
+     */
+    @Override
+    public ApiResponse modifyUserById(User user) {
+        Integer i= userDao.modifyUserById(user);
+        return i==1?new ApiResponse(200,"修改成功"):new ApiResponse(502,"修改失败");
+    }
+
+    /**
+     * 注册
+     * @param user
+     * @return
+     */
     @Override
     public ApiResponse register(User user) {
         user.setCreateTime(new Date());

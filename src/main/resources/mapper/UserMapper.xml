@@ -80,4 +80,11 @@
     <select id="searchUseTotal" resultType="int">
         select  count(*)  from   comadep.user  where user_name like '%${searchParameter}%' or telephone_number like '{searchParameter}%'
     </select>
+    <delete id="deleteUserById">
+        delete from comadep.user where id=#{userId}
+    </delete>
+    <update id="modifyUserById" parameterType="com.lst.comadep.Entity.User">
+        update comadep.user  set user_name=#{user.userName},address=#{user.address},
+                                 telephone_number=#{user.telephoneNumber},sex=#{user.sex},age=#{user.age},power_code=#{user.powerCode}  where id=#{user.id}
+    </update>
 </mapper>

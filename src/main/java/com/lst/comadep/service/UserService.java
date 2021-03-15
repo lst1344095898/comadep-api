@@ -14,4 +14,6 @@ public interface UserService {
     ApiResponse registerCheck(User user);
     ApiResponse getUserByParameter(PageParameter pageParameter);
     ApiResponse searchUser(PageParameter pageParameter);
+    ApiResponse deleteUserById(UserVo userVo);
+    ApiResponse modifyUserById(User user);
 }
