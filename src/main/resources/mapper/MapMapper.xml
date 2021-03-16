@@ -27,14 +27,17 @@
     </select>
     <select id="getAccessFrequencyLocal" resultMap="BaseResultMap">
         select a.in_address,b.user_name,b.building_number from comadep.information AS a	LEFT JOIN comadep.user as b ON a.user_id=b.id
-            where
-            a.is_field= 1 and  year (a.in_time)=#{newYear} and month (a.in_time)=#{newMonth} and
-            b.building_number=#{building_number}
+        where
+        a.is_field= 1 and  year (a.in_time)=#{newYear} and month (a.in_time)=#{newMonth} and
+        b.building_number=#{building_number}
     </select>
     <select id="getAccessFrequencyOot" resultMap="BaseResultMap">
         select a.in_address,b.user_name,b.building_number from comadep.information AS a	LEFT JOIN comadep.user as b ON a.user_id=b.id
         where
             a.is_field= 2 and  year (a.in_time)=#{newYear} and month (a.in_time)=#{newMonth} and
             b.building_number=#{building_number}
+    </select>
+    <select id="getAllBuilds" resultType="java.lang.Integer">
+        select id from com_build
     </select>
 </mapper>

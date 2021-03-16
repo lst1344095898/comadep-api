@@ -4,14 +4,13 @@ import com.lst.comadep.Dao.MapDao;
 import com.lst.comadep.Entity.ApiResponse;
 import com.lst.comadep.Entity.MapInfo;
 import com.lst.comadep.Entity.OutInInfo;
+import com.lst.comadep.Entity.Vo.ViewDateConditionVo;
 import com.lst.comadep.service.MapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class MapServiceImpl implements MapService {
@@ -30,32 +29,35 @@ public class MapServiceImpl implements MapService {
      * @return
      */
     @Override
-    public ApiResponse getAccessFrequencyLocal() {
-
+    public ApiResponse getAccessFrequencyLocal(ViewDateConditionVo viewDateConditionVo) {
+        //判断前端是否输入了时间
         //从数据库中得到当前月不同楼出入消息条数/总人数
         //当前月
         Calendar dateTemp=Calendar.getInstance();
-        System.out.println(dateTemp);
+        dateTemp.setTime(viewDateConditionVo.getSelectedTime());
         double[] arr=new double[10];
+        //获取需要改成出数据库查询楼的数量
         for (int i=1;i<=10;i++){
+            //通过年月,楼层获取出入数据
             ArrayList<OutInInfo> outInInfoArrayList=mapDao.getAccessFrequencyLocal(i,dateTemp.get(Calendar.YEAR),dateTemp.get(Calendar.MONTH)+1);
             arr[i-1]=outInInfoArrayList.size()/488.0/30.0;
-            System.out.println("第"+(i+1)+"楼"+outInInfoArrayList.size());
+            System.out.println("第"+(i)+"楼"+outInInfoArrayList.size());
         }
         System.out.println(arr[2]);
         return new ApiResponse(200,"得到频率",arr);
     }
 
     @Override
-    public ApiResponse getAccessFrequencyOot() {
+    public ApiResponse getAccessFrequencyOot(ViewDateConditionVo viewDateConditionVo) {
         //从数据库中得到当前月不同楼出入消息条数/总人数
         //当前月
         Calendar dateTemp=Calendar.getInstance();
+        dateTemp.setTime(viewDateConditionVo.getSelectedTime());
         double[] arr=new double[10];
         for (int i=1;i<=10;i++){
             ArrayList<OutInInfo> outInInfoArrayList=mapDao.getAccessFrequencyOot(i,dateTemp.get(Calendar.YEAR),dateTemp.get(Calendar.MONTH)+1);
             arr[i-1]=outInInfoArrayList.size()/488.0/30.0;
-            System.out.println("第"+(i+1)+"楼"+outInInfoArrayList.size());
+            System.out.println("第"+(i)+"楼"+outInInfoArrayList.size());
         }
         System.out.println(arr[2]);
         return new ApiResponse(200,"得到频率",arr);

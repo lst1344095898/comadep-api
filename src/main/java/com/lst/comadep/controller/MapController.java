@@ -1,6 +1,7 @@
 package com.lst.comadep.controller;
 
 import com.lst.comadep.Entity.ApiResponse;
+import com.lst.comadep.Entity.Vo.ViewDateConditionVo;
 import com.lst.comadep.service.MapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,21 +34,21 @@ public class MapController {
 //    }
 
     /**
-     * 得到本地本月出入频率
+     * 得到规定月出入频率
      * @return
      */
     @PostMapping("/getAccessFrequencyLocal")
     @ResponseBody
-    public ApiResponse getAccessFrequencyLocal(){
-        return mapService.getAccessFrequencyLocal();
+    public ApiResponse getAccessFrequencyLocal(@RequestBody ViewDateConditionVo viewDateConditionVo){
+        return mapService.getAccessFrequencyLocal(viewDateConditionVo);
     }
     /**
-     * 得到外地本月出入频率
+     * 得到外地规定月出入频率
      * @return
      */
     @PostMapping("/getAccessFrequencyOot")
     @ResponseBody
-    public ApiResponse getAccessFrequencyOot(){
-        return mapService.getAccessFrequencyOot();
+    public ApiResponse getAccessFrequencyOot(@RequestBody ViewDateConditionVo viewDateConditionVo){
+        return mapService.getAccessFrequencyOot(viewDateConditionVo);
     }
 }

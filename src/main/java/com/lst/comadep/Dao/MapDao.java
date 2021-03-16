@@ -15,5 +15,6 @@ public interface MapDao {
     ArrayList<MapInfo> getMap();
     ArrayList<OutInInfo> getAccessFrequencyLocal(@Param("building_number") int building_number, @Param("newYear") int  newYear,@Param("newMonth") int newMonth );
     ArrayList<OutInInfo> getAccessFrequencyOot(@Param("building_number") int building_number, @Param("newYear") int  newYear,@Param("newMonth") int newMonth );
+    ArrayList<Integer> getAllBuilds();
 
 }
