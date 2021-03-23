@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class ViewDateConditionVo {
     private Date selectedTime;
+
     private Integer buildingNumber;
 
     public Date getSelectedTime() {

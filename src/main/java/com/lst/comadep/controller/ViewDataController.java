@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 视图数据Controller
@@ -24,6 +25,7 @@ public class ViewDataController {
      * @return
      */
     @PostMapping("/getAgeView")
+    @ResponseBody
     public ApiResponse getAgeView(@RequestBody ViewDateConditionVo viewDateConditionVo){
         return viewDataService.getAgeView(viewDateConditionVo);
     }

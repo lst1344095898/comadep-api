@@ -30,10 +30,15 @@ public class ViewDataServiceImpl implements ViewDataService {
         //获取所有楼层
         //根据楼层得到年纪数据
         ReturnAgeEntity returnAgeEntity=new ReturnAgeEntity();
+        //得到婴儿
         returnAgeEntity.setBabyNumber(viewDataDao.getBabyNumber(buildNumber));
+        //得到少年
         returnAgeEntity.setJuvenileNumber(viewDataDao.getJuvenileNumber(buildNumber));
+        //得到青年
         returnAgeEntity.setYouthNumber(viewDataDao.getYouthNumber(buildNumber));
+        //得到成年
         returnAgeEntity.setAdultNumber(viewDataDao.getAdultNumber(buildNumber));
+        //得到老年
         returnAgeEntity.setElderlyNumber(viewDataDao.getElderlyNumber(buildNumber));
         return new ApiResponse(200,"获取成功",returnAgeEntity);
     }
