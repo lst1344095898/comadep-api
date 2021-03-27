@@ -22,11 +22,11 @@ public class InfoManagementController {
     @PostMapping("/InputOutInfoById")
     @ResponseBody
     public ApiResponse InputOutInfoById(@RequestBody OutInInfo outInInfo){
-//        outInInfo.setOutAddress("东门");
+        //        outInInfo.setOutAddress("东门");
         outInInfo.setOutTime(new Date());
         System.out.println(outInInfo);
-//        ApiResponse apiResponse= infoManagementService.InputOutInfoById(outInInfo);
-//        return apiResponse;
+        //        ApiResponse apiResponse= infoManagementService.InputOutInfoById(outInInfo);
+        //        return apiResponse;
         return new ApiResponse(200,"Yes");
     }
     //进门
