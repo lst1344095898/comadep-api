@@ -18,7 +18,6 @@ public class ViewDataServiceImpl implements ViewDataService {
     private MapDao mapDao;
     @Autowired
     private ViewDataDao viewDataDao;
-
     /**
      * 获取该楼的年纪信息
      * @param viewDateConditionVo
