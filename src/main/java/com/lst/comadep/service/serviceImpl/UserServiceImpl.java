@@ -11,8 +11,12 @@ import com.lst.comadep.service.UserService2;
 import com.lst.comadep.utils.JwtUitls;
 import com.lst.comadep.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -123,6 +127,27 @@ public class UserServiceImpl implements UserService {
     public ApiResponse modifyUserById(User user) {
         Integer i= userDao.modifyUserById(user);
         return i==1?new ApiResponse(200,"修改成功"):new ApiResponse(502,"修改失败");
+    }
+
+    /**
+     * 导出用户
+     * @return
+     */
+    @Override
+    public ApiResponse downloadUser() {
+        FileOutputStream fileOutputStream =null;
+        ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
+        HttpHeaders headers=new HttpHeaders();
+        try{
+            fileOutputStream=new FileOutputStream("D:\\File\\user.xlsx");
+            fileOutputStream.write(outputStream.toByteArray());
+            headers.setContentDispositionFormData("attachment", new String("user.xls".getBytes("UTF-8"),"ISO-8859-1"));
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return new ApiResponse(200,"yes", HttpStatus.CREATED);
     }
 
     /**

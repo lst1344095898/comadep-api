@@ -59,4 +59,15 @@ public class UserController {
     public  ApiResponse modifyUserById(@RequestBody User user){
         return  userService.modifyUserById(user);
     }
+
+    /**
+     * 导出用户数据
+     * @return
+     */
+    @PostMapping("/downloadUser")
+    @ResponseBody
+    public ApiResponse downloadUser(){
+        return userService.downloadUser();
+    }
+
 }
