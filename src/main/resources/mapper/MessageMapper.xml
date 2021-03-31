@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lst.comadep.Dao.MessageDao">
+    <insert id="sendNotice" parameterType="com.lst.comadep.Entity.Vo.NoticeVo">
+        insert into com_notice (notice_name,notice_region,notice_to_top,notice_type,notice_content,notice_date)
+        values
+        (#{noticeVo.noticeName},#{noticeVo.noticeRegion},
+         <if test="noticeVo.noticeToTop==true">
+             1,
+         </if>
+        <if test="noticeVo.noticeToTop==false">
+            0,
+        </if>
+         #{noticeVo.noticeType},#{noticeVo.noticeContent},#{noticeVo.noticeDate})
+    </insert>
+</mapper>

@@ -29,6 +29,30 @@ public class ApiResponse {
         this.message = message;
     }
 
+    /**
+     * 返回成功
+     * @param message
+     * @param data
+     */
+    public static ApiResponse ok(String message,Object data){
+        return new ApiResponse(200,message,data);
+    }
+    /**
+     * 返回成功2
+     * @param message
+     */
+    public static ApiResponse ok(String message){
+       return new ApiResponse(200,message,null);
+    }
+
+    /**
+     * 发送失败
+     * @param message
+     * @return
+     */
+    public static ApiResponse error(String message){
+        return new ApiResponse(400,message,null);
+    }
     public int getCode() {
         return code;
     }
