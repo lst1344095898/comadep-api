@@ -10,9 +10,12 @@ public class NoticeVo {
     private String noticeName;
     private String noticeRegion;
     private boolean noticeToTop;
+    //通知事务类别
     private String noticeType;
     private String noticeContent;
     private Date noticeDate;
+    //通知分类
+    private String noticeCategory;
 
     public String getNoticeName() {
         return noticeName;
@@ -63,6 +66,14 @@ public class NoticeVo {
         this.noticeDate = noticeDate;
     }
 
+    public String getNoticeCategory() {
+        return noticeCategory;
+    }
+
+    public void setNoticeCategory(String noticeCategory) {
+        this.noticeCategory = noticeCategory;
+    }
+
     @Override
     public String toString() {
         return "NoticeVo{" +
@@ -72,6 +83,7 @@ public class NoticeVo {
                 ", noticeType='" + noticeType + '\'' +
                 ", noticeContent='" + noticeContent + '\'' +
                 ", noticeDate=" + noticeDate +
+                ", noticeCategory='" + noticeCategory + '\'' +
                 '}';
     }
 }

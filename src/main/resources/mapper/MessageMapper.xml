@@ -4,7 +4,7 @@
 
 <mapper namespace="com.lst.comadep.Dao.MessageDao">
     <insert id="sendNotice" parameterType="com.lst.comadep.Entity.Vo.NoticeVo">
-        insert into com_notice (notice_name,notice_region,notice_to_top,notice_type,notice_content,notice_date)
+        insert into com_notice (notice_name,notice_region,notice_to_top,notice_type,notice_content,notice_date,notice_category)
         values
         (#{noticeVo.noticeName},#{noticeVo.noticeRegion},
          <if test="noticeVo.noticeToTop==true">
@@ -13,6 +13,6 @@
         <if test="noticeVo.noticeToTop==false">
             0,
         </if>
-         #{noticeVo.noticeType},#{noticeVo.noticeContent},#{noticeVo.noticeDate})
+         #{noticeVo.noticeType},#{noticeVo.noticeContent},#{noticeVo.noticeDate},#{noticeVo.noticeCategory})
     </insert>
 </mapper>
