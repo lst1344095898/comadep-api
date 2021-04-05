@@ -3,6 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lst.comadep.Dao.MessageDao">
+    <resultMap id="messageResultMap" type="com.lst.comadep.Entity.Vo.MessageVo">
+        <result column="id" property="messageId"/>
+        <result column="sender" jdbcType="VARCHAR" property="sender"/>
+        <result column="message_content" jdbcType="VARCHAR" property="messageContent"/>
+        <result column="recipient" jdbcType="VARCHAR" property="recipient"/>
+        <result column="send_time" jdbcType="DATE" property="sendTime"/>
+    </resultMap>
     <insert id="sendNotice" parameterType="com.lst.comadep.Entity.Vo.NoticeVo">
         insert into com_notice (notice_name,notice_region,notice_to_top,notice_type,notice_content,notice_date,notice_category)
         values
@@ -14,5 +21,13 @@
             0,
         </if>
          #{noticeVo.noticeType},#{noticeVo.noticeContent},#{noticeVo.noticeDate},#{noticeVo.noticeCategory})
+    </insert>
+
+    <insert id="sendMessage" parameterType="com.lst.comadep.Entity.Vo.MessageVo"
+            useGeneratedKeys="true" keyProperty="messageId">
+        insert into com_message (sender,message_content,recipient,send_time)
+        values
+        (#{messageVo.sender},#{messageVo.messageContent},
+        #{messageVo.recipient},#{messageVo.sendTime})
     </insert>
 </mapper>

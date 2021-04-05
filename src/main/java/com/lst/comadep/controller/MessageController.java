@@ -1,6 +1,7 @@
 package com.lst.comadep.controller;
 
 import com.lst.comadep.Entity.ApiResponse;
+import com.lst.comadep.Entity.Vo.MessageVo;
 import com.lst.comadep.Entity.Vo.NoticeVo;
 import com.lst.comadep.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,14 @@ public class MessageController {
      * @param noticeVo
      * @return
      */
-    @PostMapping("sendNotice")
+    @PostMapping("/sendNotice")
     @ResponseBody
     public ApiResponse sendNotice(@RequestBody NoticeVo noticeVo){
         return  messageService.sendNotice(noticeVo);
+    }
+    @PostMapping("/sendMessage")
+    @ResponseBody
+    public ApiResponse sendMessage(@RequestBody MessageVo messageVo){
+        return messageService.sendMessage(messageVo);
     }
 }
