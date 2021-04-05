@@ -31,4 +31,26 @@ public class MessageController {
     public ApiResponse sendMessage(@RequestBody MessageVo messageVo){
         return messageService.sendMessage(messageVo);
     }
+
+    /**
+     * 得到用户的消息列表
+     * @param messageVo
+     * @return
+     */
+    @PostMapping("/getMessageListByUserId")
+    @ResponseBody
+    public ApiResponse getMessageListByUserId(@RequestBody MessageVo messageVo){
+        return  messageService.getMessageListByUserId(messageVo);
+    }
+
+    /**
+     * 得到当前用户与这个id 的对话
+     * @param messageVo
+     * @return
+     */
+    @PostMapping("/getMessageById")
+    @ResponseBody
+    public  ApiResponse getMessageById(@RequestBody MessageVo messageVo){
+        return  messageService.getMessageById(messageVo);
+    }
 }

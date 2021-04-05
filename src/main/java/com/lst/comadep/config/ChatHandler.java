@@ -33,14 +33,15 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         //判断消息类型
         if (messageVo.getMessageType().equals("82526")){
             /**
-             * 第一次发消息 用userName  注册信息id;
+             * 第一次发消息 用userId  注册信息id;
              */
             //将消息保存
-            registerMessageIdByUserName(messageVo.getSender(),channelHandlerContext.channel());
+            System.out.println(messageVo.getSenderId());
+            registerMessageIdByUserName(messageVo.getSenderId(),channelHandlerContext.channel());
         }else{
-            //正常发消息
-            Channel receiverChannel = ChannelRelMap.get(String.valueOf(messageVo.getSender()));
-            //根据id找到主体
+            //根据id找到接收者
+            Channel receiverChannel = ChannelRelMap.get(messageVo.getRecipientId());
+            //根据id找到接收者
             Channel findChannel = clients.find(receiverChannel.id());
             String json=JSON.toJSONString(messageVo);
             if (findChannel != null) {
@@ -63,8 +64,8 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         //clients.remove(ctx.channel());
         System.out.println("客户端断开，当前被移除的channel的短ID是：" +ctx.channel().id().asShortText());
     }
-    private void registerMessageIdByUserName(String userName,Channel channel){
-        ChannelRelMap.put(userName, channel);
+    private void registerMessageIdByUserName(Integer senderId,Channel channel){
+        ChannelRelMap.put(senderId, channel);
     }
 
 

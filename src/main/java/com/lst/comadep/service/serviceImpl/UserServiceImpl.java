@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserService {
             if (MD5Utils.inputPassToFormPass(userVo.getPassword()).equals(user.getPassword())){
                 //登录成功返回token
                 String token=jwtUitls.createToken(Integer.toString(user.getId()),user.getUserName());
-                user.setPassword("123");
                 return new ApiResponse(200,"登录成功",user,token);
             }else {
                 return new ApiResponse(400,"密码错误");

@@ -14,13 +14,20 @@ import java.util.Date;
 public class MessageVo {
     //发送者信号id
     private String senderMessageId;
+    //发送者用户id
+    private Integer senderId;
     //接收者信号id(暂时需要废弃)
     private String receiveMessageId;
     private String messageType;
     private Integer nettyId ;
     private String sender;
     private String messageContent;
+    //接收者id
+    private Integer recipientId;
+    //接收者
     private String recipient;
+    //
+    private Integer userId;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date sendTime;
 }

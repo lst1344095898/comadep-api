@@ -7,4 +7,6 @@ import com.lst.comadep.Entity.Vo.NoticeVo;
 public interface MessageService {
     ApiResponse sendNotice(NoticeVo noticeVo);
     ApiResponse sendMessage(MessageVo messageVo);
+    ApiResponse getMessageListByUserId(MessageVo messageVo);
+    ApiResponse getMessageById(MessageVo messageVo);
 }
